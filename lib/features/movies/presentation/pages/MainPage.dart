@@ -1,47 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_app/features/movies/presentation/pages/FavoritePage.dart';
 import 'package:movies_app/features/movies/presentation/pages/PopularPages.dart';
 import 'package:movies_app/features/movies/presentation/pages/RecentPage.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+final navItems = [
+  {"icon": Icons.movie, "label": "Recientes"},
+  {"icon": Icons.star, "label": "Populares"},
+  {"icon": Icons.favorite, "label": "Favoritas"},
+];
 
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
+class MainPage extends StatelessWidget {
+  final Widget child;
+  const MainPage({
+    super.key, 
+    required this.child
+  });
 
-class _MainPageState extends State<MainPage> {
-
-  int _tabIndex = 0;
-
-  final List<Widget> _pages = [
-    const RecentPage(),
-    const PopularPage(),
-    const FavoritePage(),
-  ];
-
-  final navItems = [
-    {"icon": Icons.movie, "label": "Recientes"},
-    {"icon": Icons.star, "label": "Populares"},
-    {"icon": Icons.favorite, "label": "Favoritas"},
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _tabIndex = index;
-    });
+  int _getSelectedIndex(BuildContext context) {
+    final location = GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
+    if (location.startsWith('/recents')) return 0;
+    if (location.startsWith('/popular')) return 1;
+    if (location.startsWith('/favorites')) return 2;
+    return 0;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_tabIndex],
+      body: child,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.cyan.shade800,
         selectedItemColor: Colors.white,
         selectedIconTheme: const IconThemeData(size: 30),
-        currentIndex: _tabIndex,
-        onTap: _onItemTapped,
+        currentIndex: _getSelectedIndex(context),
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              context.go('/recents');
+              break;
+            case 1:
+              context.go('/popular');
+              break;
+            case 2:
+              context.go('/favorites');
+              break;
+          }
+        },
         items: navItems.map((item) {
           return BottomNavigationBarItem(
             icon: Icon(item['icon'] as IconData),
@@ -49,7 +54,6 @@ class _MainPageState extends State<MainPage> {
           );
         }).toList(),
       )
-      
       
     );
   }

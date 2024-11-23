@@ -74,6 +74,7 @@ class _ListMoviesState extends State<ListMovies> {
               itemBuilder: (context, index) {
                 final movie = _movies[index];
                 return CardMovie(
+                  id: movie.id,
                   title: movie.title, 
                   image: '${Constants.ImageAPIUrl}${movie.image}', 
                   description: movie.description

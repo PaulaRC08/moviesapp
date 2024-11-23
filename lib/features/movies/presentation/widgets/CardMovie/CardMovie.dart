@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CardMovie extends StatelessWidget {
 
+  final String id;
   final String title;
   final String image;
   final String description;
 
-  const CardMovie({super.key, required this.title, required this.image, required this.description});
+  const CardMovie({super.key, required this.title, required this.image, required this.description, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,9 @@ class CardMovie extends StatelessWidget {
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all( const Color(0xFF00838F))
                     ),
-                    onPressed: (){}, 
+                    onPressed: (){
+                      context.push('/detail/$id');
+                    }, 
                     child: const Text(
                       'Ver',
                       style: TextStyle(

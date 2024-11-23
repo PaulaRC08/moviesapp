@@ -47,27 +47,30 @@ class CardMovie extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          title.toUpperCase(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            title.toUpperCase(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15
+                            ),
                           ),
-                        ),
-                        Text(
-                          description,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                          Text(
+                            description,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
                           ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   TextButton(

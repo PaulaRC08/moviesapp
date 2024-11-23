@@ -6,12 +6,14 @@ class MoviesApiService {
 
   MoviesApiService(this._dio);
 
+  static dynamic optionsApi = {
+    'language': 'es',
+    'page': 1,
+  };
+
   Future<List<MovieListModel>> getNowPlayingMovies() async {
     try {
-      final response = await _dio.get('/movie/now_playing', queryParameters: {
-        'language': 'en-US',
-        'page': 1,
-      });
+      final response = await _dio.get('/movie/now_playing', queryParameters: optionsApi);
 
       final movies = (response.data['results'] as List)
           .map((movie) => MovieListModel.fromJson(movie))

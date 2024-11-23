@@ -16,7 +16,7 @@ class MovieListModel {
       id: json['id'],
       title: json['original_title'] ?? '',
       image: json['poster_path'],
-      description: json['overview'] ?? '',
+      description: json['overview'] == '' || json['overview'] == null ? 'Sin descripcion latina' : json['overview'],
     );
   }
 }

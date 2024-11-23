@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/features/movies/presentation/widgets/GetListMovies/GetListMovies.dart';
 
-class PopularPage extends StatefulWidget {
+class PopularPage extends StatelessWidget {
   const PopularPage({super.key});
 
   @override
-  State<PopularPage> createState() => _PopularPageState();
-}
-
-class _PopularPageState extends State<PopularPage> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Popular Movies')),
+    return const ListMovies(
+      titleComponent: 'Peliculas Populares',
+      urlApi: '/movie/popular',
     );
   }
 }

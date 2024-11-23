@@ -11,9 +11,9 @@ class MoviesApiService {
     'page': 1,
   };
 
-  Future<List<MovieListModel>> getNowPlayingMovies() async {
+  Future<List<MovieListModel>> getMoviesAccordingUrl(String apiurl) async {
     try {
-      final response = await _dio.get('/movie/now_playing', queryParameters: optionsApi);
+      final response = await _dio.get(apiurl, queryParameters: optionsApi);
 
       final movies = (response.data['results'] as List)
           .map((movie) => MovieListModel.fromJson(movie))
@@ -21,9 +21,10 @@ class MoviesApiService {
 
       return movies;
     } catch (e) {
-      throw Exception('Error al obtener películas recientes: $e');
+      throw Exception('Error al obtener películas: $e');
     }
   }
 
+  
 
 }

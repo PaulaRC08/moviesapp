@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:movies_app/features/movies/data/models/Credit.dart';
+import 'package:movies_app/features/movies/data/models/Movie.dart';
 import 'package:movies_app/features/movies/data/models/MovieList.dart';
 
 class MoviesApiService {
@@ -25,6 +27,29 @@ class MoviesApiService {
     }
   }
 
-  
+  Future<Movie> getMovieDetail(String idMovie) async {
+    try {
+      final response = await _dio.get('/movie/$idMovie', queryParameters: optionsApi);
+      final movie = Movie.fromJson(response.data);
+
+      return movie;
+    } catch (e) {
+      throw Exception('Error al obtener la pelicula: $e');
+    }
+  }
+
+    Future<List<Credit>> getCreditsMovieDetail(String idMovie) async {
+    try {
+      final response = await _dio.get('/movie/$idMovie/credits', queryParameters: optionsApi);
+      print(response);
+      final credits = (response.data['cast'] as List)
+          .map((credit) => Credit.fromJson(credit))
+          .toList();
+
+      return credits;
+    } catch (e) {
+      throw Exception('Error al obtener los creditos: $e');
+    }
+  }
 
 }

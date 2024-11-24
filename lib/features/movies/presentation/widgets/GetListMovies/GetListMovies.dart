@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/constants.dart';
 import 'package:movies_app/core/network/clientApi.dart';
 import 'package:movies_app/features/movies/data/models/MovieList.dart';
@@ -77,7 +78,15 @@ class _ListMoviesState extends State<ListMovies> {
                   id: movie.id,
                   title: movie.title, 
                   image: '${Constants.ImageAPIUrl}${movie.image}', 
-                  description: movie.description
+                  description: movie.description, 
+                  goDetail: () { 
+                    GoRouter.of(context).push(
+                      '/detail/${movie.id}',
+                      extra: () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  },
                 );
               }
             ),

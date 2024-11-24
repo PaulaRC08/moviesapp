@@ -8,8 +8,9 @@ class CardMovie extends StatelessWidget {
   final String title;
   final String image;
   final String description;
+  final VoidCallback goDetail;
 
-  const CardMovie({super.key, required this.title, required this.image, required this.description, required this.id});
+  const CardMovie({super.key, required this.title, required this.image, required this.description, required this.id, required this.goDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +80,7 @@ class CardMovie extends StatelessWidget {
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all( const Color(0xFF00838F))
                     ),
-                    onPressed: (){
-                      context.push('/detail/$id');
-                    }, 
+                    onPressed: goDetail, 
                     child: const Text(
                       'Ver',
                       style: TextStyle(

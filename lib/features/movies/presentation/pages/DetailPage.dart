@@ -1,17 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/network/clientApi.dart';
 import 'package:movies_app/features/movies/data/models/Credit.dart';
 import 'package:movies_app/features/movies/data/models/Movie.dart';
 import 'package:movies_app/features/movies/data/services/movieService.dart';
+import 'package:movies_app/features/movies/presentation/widgets/ButtonFavorite/ButtonFavorite.dart';
 
 class DetailPage extends StatefulWidget {
 
   final String movieId;
+  final VoidCallback onBack;
 
-  const DetailPage({super.key, required this.movieId});
+  const DetailPage({super.key, required this.movieId, required this.onBack});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -68,11 +69,16 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          'Detalle',
+          style: TextStyle(
+            color: Colors.black38,
+            fontWeight: FontWeight.normal
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            context.pushReplacement('/recents');
-          },
+          onPressed: widget.onBack,
         ),
       ),
       body: SafeArea(
@@ -91,7 +97,7 @@ class _DetailPageState extends State<DetailPage> {
                     height: 230,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: CachedNetworkImageProvider(_movie.image),
+                        image: CachedNetworkImageProvider(_movie.image ?? 'https://avatar.iran.liara.run/public'),
                         fit: BoxFit.cover
                       ),
                     ),
@@ -147,24 +153,9 @@ class _DetailPageState extends State<DetailPage> {
                             ],
                           ),
                         ),
-                        TextButton(
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all( const Color(0xFFB71C1C))
-                          ),
-                          onPressed: (){}, 
-                          child: const Row(
-                            children: [
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.white
-                              ),
-                              Text(
-                                'Favorito',
-                                style: TextStyle(color: Colors.white)
-                              )
-                            ],
-                          )
-                        ),
+                        ButtonFavorite(
+                          movie: _movie
+                        )
                       ],
                     ),
                   ),
@@ -208,7 +199,7 @@ class _DetailPageState extends State<DetailPage> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
                                     image: DecorationImage(
-                                      image: CachedNetworkImageProvider(credit.profile),
+                                      image: CachedNetworkImageProvider(credit.profile ?? 'https://avatar.iran.liara.run/public'),
                                       fit: BoxFit.cover
                                     ),
                                   ),

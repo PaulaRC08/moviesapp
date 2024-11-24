@@ -5,6 +5,7 @@ class Movie {
   final String id;
   final String title;
   final String description;
+  final String posterImage;
   final String image;
   final String vote;
   final List<Credit>? credits;
@@ -14,6 +15,7 @@ class Movie {
     this.title = '',
     this.description = '',
     this.image = '', 
+    this.posterImage = '', 
     this.vote = '', 
     this.credits,
   });
@@ -25,6 +27,7 @@ class Movie {
       description: json['overview'] ?? '',
       vote: json['vote_average'].toString(),
       image: '${Constants.ImageAPIUrl}${json['backdrop_path']}',
+      posterImage: '${Constants.ImageAPIUrl}${json['poster_path']}',
       credits: null,
     );
   }
@@ -37,6 +40,7 @@ class Movie {
       title: this.title,
       description: this.description,
       image: this.image,
+      posterImage: this.posterImage,
       vote: this.vote,
       credits: credits ?? this.credits,
     );

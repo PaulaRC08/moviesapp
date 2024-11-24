@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/features/movies/presentation/pages/DetailPage.dart';
 import 'package:movies_app/features/movies/presentation/pages/FavoritePage.dart';
@@ -29,7 +31,8 @@ final router = GoRouter(
             path: '/detail/:id',
             builder: (context, state) {
               final id = state.pathParameters['id'];
-              return DetailPage(movieId: id!);
+              final onClose = state.extra as VoidCallback?;
+              return DetailPage(movieId: id!, onBack: onClose!);
             },
           ),
       ],

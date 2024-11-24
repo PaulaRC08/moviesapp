@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/network/clientApi.dart';
+import 'package:movies_app/core/providers/provider.dart';
 import 'package:movies_app/features/movies/data/models/Credit.dart';
 import 'package:movies_app/features/movies/data/models/Movie.dart';
 import 'package:movies_app/features/movies/data/services/movieService.dart';
 import 'package:movies_app/features/movies/presentation/widgets/ButtonFavorite/ButtonFavorite.dart';
+import 'package:movies_app/features/movies/presentation/widgets/NamePerson/namePerson.dart';
 
-class DetailPage extends StatefulWidget {
+class DetailPage extends ConsumerStatefulWidget {
 
   final String movieId;
   final VoidCallback onBack;
@@ -15,10 +18,10 @@ class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.movieId, required this.onBack});
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  ConsumerState<DetailPage> createState() => _DetailPageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailPageState extends ConsumerState<DetailPage> {
 
 
   late final MoviesApiService _moviesApiService;
@@ -67,14 +70,23 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final namePerson = ref.watch(nameProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Detalle',
-          style: TextStyle(
-            color: Colors.black38,
-            fontWeight: FontWeight.normal
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Detalle',
+              style: TextStyle(
+                color: Colors.black38,
+                fontWeight: FontWeight.normal
+              ),
+            ),
+            NamePerson(
+              name: namePerson
+            ),
+          ],
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/constants.dart';
 import 'package:movies_app/core/network/clientApi.dart';
+import 'package:movies_app/core/providers/provider.dart';
 import 'package:movies_app/features/movies/data/models/MovieList.dart';
 import 'package:movies_app/features/movies/data/services/movieService.dart';
 import 'package:movies_app/features/movies/presentation/widgets/CardMovie/CardMovie.dart';
+import 'package:movies_app/features/movies/presentation/widgets/NamePerson/namePerson.dart';
 
-class ListMovies extends StatefulWidget {
+class ListMovies extends ConsumerStatefulWidget {
 
   final String titleComponent;
   final String urlApi;
@@ -14,10 +17,10 @@ class ListMovies extends StatefulWidget {
   const ListMovies({super.key, required this.titleComponent, required this.urlApi});
 
   @override
-  State<ListMovies> createState() => _ListMoviesState();
+  ConsumerState<ListMovies> createState() => _ListMoviesState();
 }
 
-class _ListMoviesState extends State<ListMovies> {
+class _ListMoviesState extends ConsumerState<ListMovies> {
 
   late final MoviesApiService _moviesApiService;
   List<MovieListModel> _movies = [];
@@ -49,10 +52,14 @@ class _ListMoviesState extends State<ListMovies> {
 
   @override
   Widget build(BuildContext context) {
+    final namePerson = ref.watch(nameProvider);
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          NamePerson(
+            name: namePerson
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: Text(

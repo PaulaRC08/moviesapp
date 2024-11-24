@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/constants.dart';
-import 'package:movies_app/features/movies/data/models/MovieList.dart';
+import 'package:movies_app/core/providers/provider.dart';
 import 'package:movies_app/features/movies/data/models/favoritemovie.dart';
 import 'package:movies_app/features/movies/data/services/isarService.dart';
 import 'package:movies_app/features/movies/presentation/widgets/CardMovie/CardMovie.dart';
+import 'package:movies_app/features/movies/presentation/widgets/NamePerson/namePerson.dart';
 
-class FavoritePage extends StatefulWidget {
+class FavoritePage extends ConsumerStatefulWidget {
   const FavoritePage({super.key});
 
   @override
-  State<FavoritePage> createState() => _FavoritePageState();
+  ConsumerState<FavoritePage> createState() => _FavoritePageState();
 }
 
-class _FavoritePageState extends State<FavoritePage> {
+class _FavoritePageState extends ConsumerState<FavoritePage> {
   
   List<FavoriteMovie> _movies = [];
   bool _isLoading = true;
@@ -41,10 +43,14 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
+    final namePerson = ref.watch(nameProvider);
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          NamePerson(
+            name: namePerson
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: const Text(

@@ -37,13 +37,13 @@ class MainPage extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              context.go('/recents');
+              context.replace('/recents');
               break;
             case 1:
-              context.go('/popular');
+              context.replace('/popular');
               break;
             case 2:
-              context.go('/favorites');
+              context.replace('/favorites');
               break;
           }
         },

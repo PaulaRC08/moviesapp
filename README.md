@@ -1,16 +1,60 @@
-# movies_app
+# Movies App
 
-A new Flutter project.
+**Movies App** es una aplicación construida con Flutter que permite explorar películas, ver detalles y gestionar una lista de favoritas.
 
-## Getting Started
+## Requisitos Previos
 
-This project is a starting point for a Flutter application.
+Antes de ejecutar el proyecto, asegúrate de contar con las siguientes herramientas instaladas:
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) versión `3.22.0-18.0.pre.41`
+- [Dart SDK](https://dart.dev/get-dart) versión `3.5.0` (incluido con Flutter)
+- [Visual Studio Code](https://code.visualstudio.com/) como IDE recomendado
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Instalación
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 1. Clonar el repositorio
+
+Clona este repositorio y navega a la carpeta del proyecto:
+
+```
+git clone https://github.com/PaulaRC08/moviesapp.git
+cd movies_app
+```
+
+### 2. Instalar dependencias
+
+Ejecuta el siguiente comando para instalar las dependencias del proyecto:
+
+```
+flutter pub get
+```
+
+## Ejecucion
+
+### 1. Verificar configuración de Flutter
+
+Ejecuta el siguiente comando para verificar que todo está correctamente configurado:
+```
+flutter doctor
+```
+Soluciona cualquier problema que indique el comando antes de proceder.
+
+### 2. Ejecutar la aplicación
+
+#### Android
+Conecta un dispositivo Android o emulador y ejecuta:
+```
+flutter run
+```
+#### iOS
+Si estás en macOS y tienes configurado Xcode, conecta un dispositivo iOS o emulador y ejecuta:
+```
+flutter run
+```
+
+## Contacto
+
+Para consultas, soporte o información adicional, contáctame:
+
+* Correo: paularodriguezc08@gmail.com
+* Teléfono: 3193646229

@@ -41,7 +41,6 @@ class MoviesApiService {
     Future<List<Credit>> getCreditsMovieDetail(String idMovie) async {
     try {
       final response = await _dio.get('/movie/$idMovie/credits', queryParameters: optionsApi);
-      print(response);
       final credits = (response.data['cast'] as List)
           .map((credit) => Credit.fromJson(credit))
           .toList();

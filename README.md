@@ -52,6 +52,10 @@ Si estás en macOS y tienes configurado Xcode, conecta un dispositivo iOS o emul
 flutter run
 ```
 
+## Imagen de interfaces
+
+![Pantallas construidas](assets/pantallas.png)
+
 ## Contacto
 
 Para consultas, soporte o información adicional, contáctame:
